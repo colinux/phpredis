@@ -1,13 +1,13 @@
-Source: phpredis
-Section: web
+Source: php5-redis
+Section: php
 Priority: optional
-Maintainer: Nicolas Favre-Felix <n.favre-felix@owlient.eu>
-Build-Depends: debhelper (>= 7), php5-dev
-Standards-Version: 3.8.0
+Maintainer: Gregory Colpart <reg@debian.org>
+Build-Depends: debhelper (>= 7.0.50~), php5-dev
+Standards-Version: 3.9.1
 Homepage: http://github.com/owlient/phpredis
 
-Package: phpredis
+Package: php5-redis
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${php5:Depends}
-Recommends: php5
-Description: Redis C extension for PHP5.
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${php:Depends}
+Description: PHP module for Redis
+ blabla
