@@ -1,3 +1,10 @@
+php5-redis (2.1.13+nmu1-1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * New upstream release
+
+ -- Colin Darie <colindarie@gmail.com>  Thu, 22 Sep 2011 01:44:40 +0200
+
 phpredis (2.0.11) unstable; urgency=low
 
   * Merged with upstream
