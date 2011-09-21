@@ -19,7 +19,7 @@ make && make install
 
 You can generate a debian package for PHP5, accessible from Apache 2 by running `./mkdeb-apache2.sh` or with `dpkg-buildpackage` or `svn-buildpackage`.
 
-This extension exports a single class, `Redis` (and `RedisException` used in case of errors). Check out https://github.com/ukko/phpredis-phpdoc for a PHP stub that you can use in your IDE for code completion.
+This extension exports a single class, `Redis` (and `RedisException` used in case of errors).
 
 Install on OSX
 ==============
@@ -55,13 +55,6 @@ session.save_path = "tcp://host1:6379?weight=1, tcp://host2:6379?weight=2&timeou
 
 Sessions have a lifetime expressed in seconds and stored in the INI variable "session.gc_maxlifetime". You can change it with [`ini_set()`](http://php.net/ini_set).
 The session handler requires a version of Redis with the `SETEX` command (at least 2.0).
-
-
-Distributed Redis Array
-=======================
-
-See [dedicated page](https://github.com/nicolasff/phpredis/blob/master/arrays.markdown#readme).
-
 
 Error handling
 ==============
@@ -116,7 +109,7 @@ So be patient on to many open FD's (specially on redis server side) when using p
 connections on many servers connecting to one redis server.
 
 Also more than one persistent connection can be made identified by either host + port + timeout
-or host + persistent_id or unix socket + timeout.
+or unix socket + timeout.
 
 This feature is not available in threaded versions. `pconnect` and `popen` then working like their non
 persistent equivalents.
@@ -126,7 +119,6 @@ persistent equivalents.
 *host*: string. can be a host, or the path to a unix domain socket  
 *port*: int, optional  
 *timeout*: float, value in seconds (optional, default is 0 meaning unlimited)  
-*persistent_id*: string. identity for the requested persistent connection
 
 ##### *Return Value*
 
@@ -137,9 +129,8 @@ persistent equivalents.
 <pre>
 $redis->pconnect('127.0.0.1', 6379);
 $redis->pconnect('127.0.0.1'); // port 6379 by default - same connection like before.
-$redis->pconnect('127.0.0.1', 6379, 2.5); // 2.5 sec timeout and would be another connection than the two before.
-$redis->pconnect('127.0.0.1', 6379, 2.5, 'x'); // x is sent as persistent_id and would be another connection the the three before.
-$redis->pconnect('/tmp/redis.sock'); // unix domain socket - would be another connection than the four before.
+$redis->pconnect('127.0.0.1', 6379, 2.5); // 2.5 sec timeout and would be another connection then the two before.
+$redis->pconnect('/tmp/redis.sock'); // unix domain socket - would be another connection then the three before.
 </pre>
 
 ## close
@@ -1390,7 +1381,6 @@ None.
 <pre>
 $redis->bgSave();
 </pre>
-
 ## lastSave
 
 ##### *Description*
@@ -1628,30 +1618,6 @@ None.
 ##### *Example*
 <pre>
 $redis->info();
-</pre>
-
-## resetStat
-##### *Description*
-Resets the statistics reported by Redis using the INFO command (`info()` function).
-
-These are the counters that are reset:
-
-* Keyspace hits
-* Keyspace misses
-* Number of commands processed
-* Number of connections received
-* Number of expired keys
-
-
-##### *Parameters*
-None.
-
-##### *Return value*
-*BOOL*: `TRUE` in case of success, `FALSE` in case of failure.
-
-##### *Example*
-<pre>
-$redis->resetStat();
 </pre>
 
 ## ttl

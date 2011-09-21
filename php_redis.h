@@ -96,7 +96,6 @@ PHP_METHOD(Redis, auth);
 PHP_METHOD(Redis, ttl);
 PHP_METHOD(Redis, persist);
 PHP_METHOD(Redis, info);
-PHP_METHOD(Redis, resetStat);
 PHP_METHOD(Redis, select);
 PHP_METHOD(Redis, move);
 PHP_METHOD(Redis, zAdd);
@@ -172,7 +171,7 @@ PHP_MINFO_FUNCTION(redis);
 PHPAPI int redis_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent);
 PHPAPI void redis_atomic_increment(INTERNAL_FUNCTION_PARAMETERS, char *keyword, int count);
 PHPAPI int generic_multiple_args_cmd(INTERNAL_FUNCTION_PARAMETERS, char *keyword, int keyword_len,
-									 int min_argc, RedisSock **redis_sock, int has_timeout, int all_keys);
+									 int min_argc, RedisSock **redis_sock, int has_timeout);
 PHPAPI void generic_sort_cmd(INTERNAL_FUNCTION_PARAMETERS, char *sort, int use_alpha);
 PHPAPI void generic_empty_cmd(INTERNAL_FUNCTION_PARAMETERS, char *cmd, int cmd_len, ...);
 PHPAPI void generic_empty_long_cmd(INTERNAL_FUNCTION_PARAMETERS, char *cmd, int cmd_len, ...);
@@ -191,10 +190,9 @@ PHPAPI void set_pipeline_head(zval *object, request_item *head);
 PHPAPI request_item* get_pipeline_current(zval *object);
 PHPAPI void set_pipeline_current(zval *object, request_item *current);
 
-#ifndef _MSC_VER
 ZEND_BEGIN_MODULE_GLOBALS(redis)
 ZEND_END_MODULE_GLOBALS(redis)
-#endif
+
 
 struct redis_queued_item {
 
