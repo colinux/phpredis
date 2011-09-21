@@ -52,23 +52,21 @@
 
 
 #define MULTI_RESPONSE(callback) IF_MULTI_OR_PIPELINE() { \
-	fold_item *f1, *current; \
-	f1 = malloc(sizeof(fold_item)); \
+	fold_item *f1 = malloc(sizeof(fold_item)); \
 	f1->fun = (void *)callback; \
 	f1->next = NULL; \
-	current = redis_sock->current;\
+	fold_item *current = redis_sock->current;\
 	if(current) current->next = f1; \
 	redis_sock->current = f1; \
   }
 
 #define PIPELINE_ENQUEUE_COMMAND(cmd, cmd_len) request_item *tmp; \
-	struct request_item *current_request;\
 	tmp = malloc(sizeof(request_item));\
 	tmp->request_str = calloc(cmd_len, 1);\
 	memcpy(tmp->request_str, cmd, cmd_len);\
 	tmp->request_size = cmd_len;\
 	tmp->next = NULL;\
-	current_request = redis_sock->pipeline_current; \
+	struct request_item *current_request = redis_sock->pipeline_current; \
 	if(current_request) {\
 		current_request->next = tmp;\
 	} \
@@ -83,12 +81,11 @@
 }
 
 #define REDIS_SAVE_CALLBACK(callback, closure_context) IF_MULTI_OR_PIPELINE() { \
-	fold_item *f1, *current; \
-	f1 = malloc(sizeof(fold_item)); \
+	fold_item *f1 = malloc(sizeof(fold_item)); \
 	f1->fun = (void *)callback; \
 	f1->ctx = closure_context; \
 	f1->next = NULL; \
-	current = redis_sock->current;\
+	fold_item *current = redis_sock->current;\
 	if(current) current->next = f1; \
 	redis_sock->current = f1; \
 	if(NULL == redis_sock->head) { \
@@ -150,7 +147,6 @@ typedef struct {
     int            failed;
     int            status;
     int            persistent;
-    char           *persistent_id;
 
     int            serializer;
 
